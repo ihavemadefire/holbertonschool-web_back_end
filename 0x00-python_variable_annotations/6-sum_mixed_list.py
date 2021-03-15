@@ -3,6 +3,6 @@
 from typing import Mapping
 
 
-def sum_mixed_list(mxd_lst: Mapping[float, int]) -> float:
+def sum_mixed_list(mxd_lst: Mapping[int, float]) -> float:
     '''takes in a list of floats and sums them'''
     return sum(mxd_lst)
