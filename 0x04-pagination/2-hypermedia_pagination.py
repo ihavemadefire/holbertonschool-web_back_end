@@ -50,8 +50,8 @@ class Server:
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> List[List]:
         '''Returns a dict of paginated data'''
-        ret = {}
-        page_set = self.get_page(page, page_size)
+        ret: dict = {}
+        page_set: List[List] = self.get_page(page, page_size)
         # set value pairs
         ret["page_size"] = len(page_result)
         ret["page"] = page
