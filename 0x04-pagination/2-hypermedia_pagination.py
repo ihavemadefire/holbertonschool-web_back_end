@@ -69,5 +69,5 @@ class Server:
         else:
             ret["prev_page"] = None
         # Divide the length of the dataset by the size of pages rounded up
-        ret[total_pages] = math.ceil(len(self.__dataset) / page_size)
+        ret["total_pages"] = math.ceil(len(self.__dataset) / page_size)
         return ret
