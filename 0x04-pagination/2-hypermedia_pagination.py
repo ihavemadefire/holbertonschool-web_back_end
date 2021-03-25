@@ -55,7 +55,7 @@ class Server:
         assert isinstance(page_size, int) and page_size > 0
         page_set: List[List] = self.get_page(page, page_size)
         # set value pairs
-        ret["page_size"] = len(page_result)
+        ret["page_size"] = len(page_set)
         ret["page"] = page
         ret["data"] = page_set
         # check length, if next then next else, none
