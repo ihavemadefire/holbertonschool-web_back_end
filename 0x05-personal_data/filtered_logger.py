@@ -2,6 +2,8 @@
 '''This is the module that constains the filter datum function'''
 from typing import List
 import re
+import os
+import mysql.connector
 import logging
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
@@ -47,3 +49,18 @@ def get_logger() -> logging.Logger:
     x.setFormatter(RedactingFormatter)
     logger.addHandler(x)
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    '''Establishes connection with database'''
+    host = os.environ["PERSONAL_DATA_DB_HOST"]
+    user = os.environ["PERSONAL_DATA_DB_USERNAME"]
+    passwd = os.environ["PERSONAL_DATA_DB_PASSWORD"]
+    db = os.environ["PERSONAL_DATA_DB_NAME"]
+    conn = mysql.connector.connect(
+            host=host,
+            user=user,
+            passwd=passwd,
+            database=db
+    )
+    return conn
