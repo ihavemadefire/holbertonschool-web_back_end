@@ -64,3 +64,14 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
             database=db
     )
     return conn
+
+
+def main():
+    """This main function should get the fields from the database
+        filter them then return them in a formated way.
+    """
+
+
+
+if __name__ == "__main__":
+    main()
