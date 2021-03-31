@@ -49,6 +49,7 @@ def not_found(error) -> str:
 
 @app.before_request
 def before_request_func() -> Dict:
+    '''Requires auth before request'''
     if auth and auth.require_auth(request.path, excluded_paths):
         if auth.authorization_header(request) is None:
             abort(401)
