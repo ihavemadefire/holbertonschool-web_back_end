@@ -5,6 +5,7 @@ from typing import List, TypeVar
 
 
 class Auth():
+    '''This is the base auth class'''
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         '''This funtion requires auth for endpoints'''
         if path is None or excluded_paths is None:
