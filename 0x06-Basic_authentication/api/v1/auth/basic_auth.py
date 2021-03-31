@@ -2,7 +2,6 @@
 '''This module contains the basic_auth class'''
 from .auth import Auth
 from models.user import User
-from models.base import DATA
 import base64
 from typing import TypeVar
 
@@ -48,8 +47,8 @@ class BasicAuth(Auth):
             return None, None
         if ':' not in decoded_base64_authorization_header:
             return None, None
-        a = decoded_base64_authorization_header.split(":")[0]
-        b = decoded_base64_authorization_header.split(":")[1]
+        a = decoded_base64_authorization_header.split(":", 1)[0]
+        b = decoded_base64_authorization_header.split(":", 1)[1]
         return (a, b)
 
     def user_object_from_credentials(self,
