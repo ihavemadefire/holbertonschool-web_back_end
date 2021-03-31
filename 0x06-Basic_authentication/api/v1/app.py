@@ -21,7 +21,9 @@ if auth_type == 'auth':
 elif auth_type == 'basic_auth':
     from api.v1.auth.basic_auth import BasicAuth
     auth = BasicAuth()
-excluded_paths = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
+excluded_paths = ['/api/v1/status/',
+                  '/api/v1/unauthorized/',
+                  '/api/v1/forbidden/']
 
 
 @app.errorhandler(401)

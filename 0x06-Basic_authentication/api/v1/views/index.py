@@ -9,7 +9,7 @@ from api.v1.views import app_views
 def unauthorized() -> str:
     """ GET /api/v1/unauthorized
     Return:
-      - the status of the API
+      - 401 status code
     """
     return abort(401)
 
@@ -18,7 +18,7 @@ def unauthorized() -> str:
 def forbidden() -> str:
     """ GET /api/v1/forbidden
     Return:
-      - the status of the API
+      - 403 status code
     """
     return abort(403)
 
@@ -27,7 +27,7 @@ def forbidden() -> str:
 def status() -> str:
     """ GET /api/v1/status
     Return:
-      - Unauthorized endpoint
+      - the status of the API
     """
     return jsonify({"status": "OK"})
 
