@@ -2,6 +2,7 @@
 '''This module contains the basic_auth class'''
 from .auth import Auth
 from models.user import User
+from mdels.base import DATA
 import base64
 from typing import TypeVar
 
@@ -60,7 +61,7 @@ class BasicAuth(Auth):
             return None
         if user_pwd is None or not isinstance(user_pwd, str):
             return None
-        if User.count() == 0 or not User.search({"email": user_email}):
+        if not DATA.get("User")
             return None
         user = User.search({"email": user_email})[0]
         if user.is_valid_password(user_pwd):
