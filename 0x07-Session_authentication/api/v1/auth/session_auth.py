@@ -37,9 +37,8 @@ class SessionAuth(Auth):
         '''Logoing function'''
         if request is None:
             return False
-        if self.session_cookie(request) is None:
+        cookie = self.session_cookie(request)
+        if cookie is None or if self.user_id_for_session(cookie):
             return False
-        if self.user_id_for_session_id(session_id) is none:
-            return False
-        del self.user_id_by_session_id[session_id]
+        del self.user_id_by_session_id[cookie]
         return True
