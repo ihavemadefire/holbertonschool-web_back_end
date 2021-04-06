@@ -4,6 +4,7 @@ from .auth import Auth
 from models.user import User
 import uuid
 
+
 class SessionAuth(Auth):
     '''The session authorization class'''
     user_id_by_session_id = {}
@@ -31,3 +32,14 @@ class SessionAuth(Auth):
         session_id = self.session_cookie(request)
         user_id = self.user_id_for_session_id(session_id)
         return User.get(user_id)
+
+    def destroy_session(self, request=None):
+        '''Logoing function'''
+        if request is None:
+            return False
+        if self.session_cookie(request) is None:
+            return False
+        if self.user_id_for_session_id(session_id) is none:
+            return False
+        del self.user_id_by_session_id[session_id]
+        return True
