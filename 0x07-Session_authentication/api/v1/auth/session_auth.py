@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''This module contains the SessionAuth class'''
-from .auth import Auth
+from api.v1.auth.auth import Auth
 from models.user import User
 import uuid
 
@@ -38,7 +38,7 @@ class SessionAuth(Auth):
         if request is None:
             return False
         cookie = self.session_cookie(request)
-        if cookie is None or self.user_id_for_session(cookie):
+        if cookie is None or self.user_id_for_session(cookie) is None:
             return False
         del self.user_id_by_session_id[cookie]
         return True
