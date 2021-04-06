@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 '''This module contains the SessionAuth class'''
 from .auth import Auth
+from models.user import User
 import uuid
 
 class SessionAuth(Auth):
@@ -17,7 +18,6 @@ class SessionAuth(Auth):
         SessionAuth.user_id_by_session_id[self.id] = user_id
         return self.id
 
-
     def user_id_for_session_id(self, session_id: str = None) -> str:
         '''This function returns the value of the '''
         if session_id is None:
@@ -25,3 +25,9 @@ class SessionAuth(Auth):
         if not isinstance(session_id, str):
             return None
         return SessionAuth.user_id_by_session_id.get(session_id)
+
+    def current_user(self, request=None):
+        '''Returns the current user'''
+        session_id = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(session_id)
+        return User.get(user_id)
