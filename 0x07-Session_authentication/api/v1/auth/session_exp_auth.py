@@ -30,17 +30,15 @@ class SessionExpAuth(SessionAuth):
         '''This overloads the useridforsessionid function'''
         if session_id is None:
             return None
-        if self.user_id_by_session_id[session_id] is None:
+        if self.user_id_by_session_id.get(session_id) is None:
             return None
-        session_dict = self.user_id_by_session_id[session_id]
+        session_dict = self.user_id_by_session_id.get(session_id)
         if self.session_duration <= 0:
-            return session_dict['user_id']
-        if session_dict["created_at"] is None:
-            return None
-        created_at = session_dict["created_at"]
+            return session_dict.get('user_id')
+        created_at = session_dic.get("created_at")
         if created_at is None:
             return None
         expires = created_at + timedelta(seconds=self.session_duration)
         if expires < datetime.now():
             return None
-        return session_dict['user_id']
+        return session_dict.get('user_id')
