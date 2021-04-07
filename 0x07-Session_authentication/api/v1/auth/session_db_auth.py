@@ -19,6 +19,7 @@ class SessionDBAuth(SessionExpAuth):
         return session_id
 
     def user_id_for_session_id(self, session_id=None):
+        '''retrieves a user id from a session id'''
         if session_id is None:
             return None
         # can't load with get since I don't have the object Id
