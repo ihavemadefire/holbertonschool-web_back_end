@@ -30,7 +30,7 @@ class SessionDBAuth(SessionExpAuth):
         user_sessions = UserSession.search({"session_id": session_id})
         # replicate the other class behavoir
         if self.session_duration <= 0:
-            user_sessions[0].user_id
+            return user_sessions[0].user_id
         # iterate over list and find match
         for user_session in user_sessions:
             created_at = user_session.created_at
