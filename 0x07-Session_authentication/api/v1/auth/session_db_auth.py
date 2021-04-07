@@ -27,7 +27,7 @@ class SessionDBAuth(SessionExpAuth):
         # Search the list for anything with a session id
         user_sessions = UserSession.search({"session_id": session_id})
         # replicate the other class behavoir
-        if self.session_duration >= 0:
+        if self.session_duration <= 0:
             user_sessions[0].user_id
         # iterate over list and find match
         for user_session in user_sessions:
