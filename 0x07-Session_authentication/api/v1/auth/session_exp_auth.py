@@ -10,10 +10,10 @@ class SessionExpAuth(SessionAuth):
     def __init__(self):
         '''Overloading init function'''
         session_duration = getenv("SESSION_DURATION")
-        if session_duration is None:
-            self.session_duration = 0
-        else:
+        if session_duration:
             self.session_duration = int(session_duration)
+        else:
+            self.session_duration = 0
 
     def create_session(self, user_id=None):
         '''This overloads the create session to add a session dict'''
