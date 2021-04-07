@@ -11,6 +11,8 @@ class SessionDBAuth(SessionExpAuth):
 
     def create_session(self, user_id=None):
         '''Overload create session to store the session in db'''
+        if user_id is None:
+            return None
         session_id = super().create_session(user_id)
         if session_id is None:
             return None
