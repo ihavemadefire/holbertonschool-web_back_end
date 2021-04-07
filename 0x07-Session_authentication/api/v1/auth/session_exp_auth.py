@@ -11,7 +11,7 @@ class SessionExpAuth(SessionAuth):
         '''Overloading init function'''
         session_duration = getenv("SESSION_DURATION")
         if session_duration is None:
-            session_duration = 0
+            self.session_duration = 0
         else:
             self.session_duration = int(session_duration)
 
