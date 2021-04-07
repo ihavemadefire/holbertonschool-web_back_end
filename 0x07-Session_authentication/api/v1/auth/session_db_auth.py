@@ -44,7 +44,7 @@ class SessionDBAuth(SessionExpAuth):
         def destroy_session(self, request=None):
             '''Deletes session and logs user out'''
             if request is None:
-                return None
+                return False
             cookie = self.session_cookie(request)
             if cookie is None:
                 return False
