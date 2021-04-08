@@ -7,6 +7,8 @@ from datetime import datetime, timedelta
 
 class SessionExpAuth(SessionAuth):
     '''This class defines how session auth expires'''
+    user_id_by_session_id = {}
+    
     def __init__(self):
         '''Overloading init function'''
         session_duration = getenv("SESSION_DURATION")
