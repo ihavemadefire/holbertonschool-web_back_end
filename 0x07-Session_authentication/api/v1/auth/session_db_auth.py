@@ -32,13 +32,14 @@ class SessionDBAuth(SessionExpAuth):
         if self.session_duration <= 0:
             return user_sessions[0].user_id
         # iterate over list and find match
-        for user_session in user_sessions:
-            created_at = user_session.created_at
-            exp = created_at + timedelta(seconds=self.session_duration)
-            if user_session.session_id == session_id:
-                if exp < datetime.now():
-                    return None
-                return user_session.user_id
+        if user_sessions:
+            for user_session in user_sessions:
+                created_at = user_session.created_at
+                exp = created_at + timedelta(seconds=self.session_duration)
+                if user_session.session_id == session_id:
+                    if exp < datetime.now():
+                        return None
+                    return user_session.user_id
         return None
 
         def destroy_session(self, request=None):
@@ -51,7 +52,8 @@ class SessionDBAuth(SessionExpAuth):
             # get user sessionlist out of db as above
             logout_list = UserSession.search({"session_id": session_id})
             # loop through list to find logout and remove it from db
-            for logout in logout_list:
-                if logout.session_id == session_id:
-                    logout.remove()
+            if logout_list:
+                for logout in logout_list:
+                    if logout.session_id == session_id:
+                        logout.remove()
             return True
