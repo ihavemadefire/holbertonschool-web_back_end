@@ -45,6 +45,6 @@ def session_logout():
     '''Def destroy session'''
     from api.v1.app import auth
     logout = auth.destroy_session(request)
-    if logout is False:
+    if not logout:
         abort(404)
     return jsonify({}), 200

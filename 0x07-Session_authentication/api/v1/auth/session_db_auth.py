@@ -50,10 +50,10 @@ class SessionDBAuth(SessionExpAuth):
             if cookie is None:
                 return False
             # get user sessionlist out of db as above
-            logout_list = UserSession.search({"session_id": session_id})
+            logout_list = UserSession.search({"session_id": cookie})
             # loop through list to find logout and remove it from db
             if logout_list:
                 for logout in logout_list:
-                    if logout.session_id == session_id:
+                    if logout.session_id == cookie:
                         logout.remove()
             return True
