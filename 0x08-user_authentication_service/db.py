@@ -34,5 +34,3 @@ class DB:
         self._session.add(u)
         self._session.commit()
         return u
-
-        
