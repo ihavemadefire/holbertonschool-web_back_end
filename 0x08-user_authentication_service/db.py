@@ -3,6 +3,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.exc import InvalidRequestError, NoResultFound
 from user import Base
 from user import User
 
@@ -30,3 +31,7 @@ class DB:
         self._session.add(u)
         self._session.commit()
         return u
+
+    def find_user_by(**kwargs): -> User:
+        '''Returns top row of results from pass kwargs'''
+        return self._session.query(User).filter_by(**kwargs).one()
