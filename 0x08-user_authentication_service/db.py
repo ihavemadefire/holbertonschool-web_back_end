@@ -25,11 +25,9 @@ class DB:
             self.__session = DBSession()
         return self.__session
 
-    def add_user(self, email: str, hashed_password: str) -> TypeVar(User):
+    def add_user(self, email: str, hashed_password: str) -> User:
         '''add ser function'''
-        u = User()
-        u.email = email
-        u.hashed_password = hashed_password
+        u = User(hashed_password=hashed_password, email=email)
         self._session.add(u)
         self._session.commit()
         return u
