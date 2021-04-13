@@ -40,7 +40,7 @@ class DB:
         This function gets the object via ID then loops through kwargs
         to update values
         '''
-        u = self.find_user_by(id = user_id)
+        u = self.find_user_by(id=user_id)
 
         for k, v in kwargs.items():
             if hasattr(User, k):
