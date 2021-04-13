@@ -3,14 +3,13 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-fromt typing import TypeVar
-
+from typing import TypeVar
 from user import Base
 from user import User
 
 
 class DB:
-
+    '''Database class'''
     def __init__(self):
         '''Initialization function'''
         self._engine = create_engine("sqlite:///a.db", echo=True)
