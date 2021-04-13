@@ -32,6 +32,6 @@ class DB:
         self._session.commit()
         return u
 
-    def find_user_by(**kwargs): -> User:
+    def find_user_by(**kwargs) -> User:
         '''Returns top row of results from pass kwargs'''
         return self._session.query(User).filter_by(**kwargs).one()
