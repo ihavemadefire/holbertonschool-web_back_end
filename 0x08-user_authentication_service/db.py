@@ -34,3 +34,18 @@ class DB:
     def find_user_by(self, **kwargs) -> User:
         '''Returns top row of results from pass kwargs'''
         return self._session.query(User).filter_by(**kwargs).one()
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        '''
+        This function gets the object via ID then loops through kwargs
+        to update values
+        '''
+        u = self.find_user_by(id = user_id)
+
+        for k, v in kwargs.items():
+            if hasattr(User, k):
+                setattr(u, k, v)
+            else:
+                raise ValueError
+        self._session.commit()
+        return None
