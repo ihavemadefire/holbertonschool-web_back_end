@@ -3,8 +3,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from user import Base
-from user import User
+from user import Base, User
 
 
 class DB:
@@ -41,7 +40,6 @@ class DB:
         to update values
         '''
         u = self.find_user_by(id=user_id)
-
         for k, v in kwargs.items():
             if hasattr(User, k):
                 setattr(u, k, v)
