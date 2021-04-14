@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-'''This modu'''
-
+'''This module contains the main application'''
 from flask import Flask, jsonify, request, abort
 from auth import Auth
 from flask.helpers import make_response
