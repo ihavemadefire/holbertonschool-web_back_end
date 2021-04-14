@@ -16,7 +16,7 @@ def index():
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
 def users():
-    '''basic route'''
+    '''user route'''
     email = request.form.get("email")
     password = request.form.get("password")
     try:
@@ -29,7 +29,7 @@ def users():
 
 @app.route('/sessions', methods=['POST'], strict_slashes=False)
 def login():
-    '''login route'''
+    '''login session route'''
     email = request.form.get("email")
     password = request.form.get("password")
     if not AUTH.valid_login(email, password):
