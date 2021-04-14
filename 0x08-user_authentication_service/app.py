@@ -66,13 +66,12 @@ def profile():
 
 @app.route('/reset_password', methods=['GET'], strict_slashes=False)
 def get_reset_password_token():
-    '''Fetch User profile function function'''
+    '''gets password reset token endpoint'''
     email = request.form.get("email")
     try:
-        u = AUTH._db.find_user_by(email=email)
-        if u:
-            token = AUTH._db.get_reset_password_token(email)
-            return jsonify({{"email": email, "reset_token": token}}), 200
+        AUTH._db.find_user_by(email=email)
+        token = AUTH._db.get_reset_password_token(email)
+        return jsonify({{"email": email, "reset_token": token}})
     except NoResultFound:
         return abort(403)
 
