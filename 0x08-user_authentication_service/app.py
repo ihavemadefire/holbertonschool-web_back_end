@@ -68,9 +68,9 @@ def profile():
 def get_reset_password_token():
     '''Fetch User profile function function'''
     email = request.form.get("email")
-    u = self._db.find_user_by(email=email)
+    u = AUTH._db.find_user_by(email=email)
     if u:
-        token = _generate_uuid()
+        token = AUTH._db.get_reset_password_token(email)
         return jsonify({{"email": email, "reset_token": token}}), 200
     return abort(403)
 
