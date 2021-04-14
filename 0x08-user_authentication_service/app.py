@@ -38,7 +38,7 @@ def login():
         r.set_cookie("session_id", session)
         return r
     else:
-        return abort(401)
+        abort(401)
 
 
 @app.route('/sessions', methods=['DELETE'], strict_slashes=False)
@@ -50,7 +50,7 @@ def logout():
         if u:
             AUTH.destroy_session(u.id)
             return redirect("/")
-    return abort(403)
+    abort(403)
 
 
 @app.route('/profile', methods=['GET'], strict_slashes=False)
@@ -61,7 +61,7 @@ def profile():
         u = AUTH.get_user_from_session_id(s_id)
         if u:
             return jsonify({"email": u.email})
-    return abort(403)
+    abort(403)
 
 
 @app.route('/reset_password', methods=['POST'])
