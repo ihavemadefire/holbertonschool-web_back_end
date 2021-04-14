@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''This module contains the main application'''
-from flask import Flask, jsonify, request, abort
+from flask import Flask, jsonify, request, abort, redirect
 from auth import Auth
 from flask.helpers import make_response
 app = Flask(__name__)
@@ -39,6 +39,18 @@ def login():
         return session
     else:
         abort(401)
+
+
+@app.route('/sessions', methods=['DELETE'])
+def logout():
+    '''User logout function'''
+    s_id = request.cookies.get('session_id')
+    if s_id:
+        u = AUTH.find_user_by(session_id=s_id)
+        AUTH.destroy_session(u.id)
+        return redirect("/")
+    else:
+        abort(403)
 
 
 if __name__ == "__main__":
