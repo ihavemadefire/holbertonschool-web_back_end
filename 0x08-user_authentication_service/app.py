@@ -70,7 +70,7 @@ def get_reset_password_token():
     email = request.form.get("email")
     try:
         AUTH._db.find_user_by(email=email)
-        token = AUTH._db.get_reset_password_token(email)
+        token = AUTH.get_reset_password_token(email)
         return jsonify({{"email": email, "reset_token": token}})
     except NoResultFound:
         return abort(403)
