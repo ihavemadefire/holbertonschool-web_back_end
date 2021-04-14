@@ -46,7 +46,7 @@ def logout():
     '''User logout function'''
     s_id = request.cookies.get('session_id')
     if s_id:
-        u = AUTH.find_user_by(s_id)
+        u = AUTH.get_user_from_session_id(s_id)
         AUTH.destroy_session(u.id)
         return redirect("/")
     else:
