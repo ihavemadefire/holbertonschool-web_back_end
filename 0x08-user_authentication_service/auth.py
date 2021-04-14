@@ -64,4 +64,7 @@ class Auth:
     def get_user_from_session_id(self, session_id: int) -> Union[User, None]:
         '''Gets user from session ID'''
         u = self._db.find_user_by(session_id=session_id)
-        return u
+        if u:
+            return u
+        else:
+            return None
