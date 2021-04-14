@@ -75,7 +75,7 @@ class Auth:
         '''This function destroys a user session'''
         try:
             u = self._db.find_user_by(id=user_id)
-            self._db.update_user(u.id, {session_id=None})
+            self._db.update_user(u.id, {"session_id": None})
             return None
         except NoResultFound:
             return None
