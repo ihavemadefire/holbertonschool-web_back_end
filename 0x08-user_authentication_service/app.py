@@ -9,13 +9,13 @@ AUTH = Auth()
 
 @app.route('/', methods=['GET'], strict_slashes=False)
 def index():
-    '''basic route'''
+    '''basic index route'''
     return jsonify({"message": "Bienvenue"})
 
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
 def users():
-    '''user route'''
+    '''user creation route'''
     email = request.form.get("email")
     password = request.form.get("password")
     try:

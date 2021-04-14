@@ -8,7 +8,7 @@ from user import User
 
 
 class DB:
-    '''Database class'''
+    '''This is the Database class'''
     def __init__(self):
         '''Initialization function'''
         self._engine = create_engine("sqlite:///a.db")
@@ -18,7 +18,7 @@ class DB:
 
     @property
     def _session(self):
-        '''sessionmakeer function'''
+        '''This is the sessionmakeer function'''
         if self.__session is None:
             DBSession = sessionmaker(bind=self._engine)
             self.__session = DBSession()
