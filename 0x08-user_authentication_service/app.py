@@ -26,7 +26,7 @@ def users():
         return jsonify({"message": "email already registered"}), 400
 
 
-@app.route('/sessions', methods=['POST'])
+@app.route('/sessions', methods=['POST'], strict_slashes=False)
 def login():
     '''login session route'''
     email = request.form.get("email")
@@ -41,7 +41,7 @@ def login():
         return abort(401)
 
 
-@app.route('/sessions', methods=['DELETE'])
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
 def logout():
     '''User logout function'''
     s_id = request.cookies.get('session_id')
