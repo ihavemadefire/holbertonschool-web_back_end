@@ -38,7 +38,7 @@ def login():
         r.set_cookie("session_id", session)
         return session
     else:
-        abort(401)
+        return abort(401)
 
 
 @app.route('/sessions', methods=['DELETE'])
