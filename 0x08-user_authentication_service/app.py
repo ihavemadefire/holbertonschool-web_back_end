@@ -2,6 +2,7 @@
 '''This module contains the main application'''
 from flask import Flask, jsonify, request, abort, redirect
 from auth import Auth
+from sqlalchemy.orm.exc import NoResultFound
 from flask.helpers import make_response
 app = Flask(__name__)
 AUTH = Auth()
