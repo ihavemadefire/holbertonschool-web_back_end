@@ -98,6 +98,6 @@ class Auth:
             hashed = _hash_password(password)
             kv = {"hashed_password": hashed, "reset_token": None}
             self._db.update_user(u.id, **kv)
-            return None
         except NoResultFound:
             raise ValueError
+        return None
