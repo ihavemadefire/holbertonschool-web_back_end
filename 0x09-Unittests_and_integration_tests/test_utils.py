@@ -1,8 +1,8 @@
-
 #!/usr/bin/env python3
 """Generic utilities for github org client.
 """
 import requests
+from parameterized import parameterized
 from functools import wraps
 from typing import (
     Mapping,
@@ -11,6 +11,8 @@ from typing import (
     Dict,
     Callable,
 )
+import unittest
+from unittest import mock
 
 __all__ = [
     "access_nested_map",
@@ -74,3 +76,65 @@ def memoize(fn: Callable) -> Callable:
         return getattr(self, attr_name)
 
     return property(memoized)
+
+
+class TestAccessNestedMap(unittest.TestCase):
+    '''This class tests mapping methods'''
+    @parameterized.expand([
+        ({"a": 1}, ["a"], 1),
+        ({"a": {"b": 2}}, ["a"], {"b": 2}),
+        ({"a": {"b": 2}}, ["a", "b"], 2)
+    ])
+    def test_access_nested_map(self, nested_map: Mapping,
+                               path: Sequence, exp: int) -> Any:
+        '''This tests correct inputs to the function'''
+        self.assertEqual(access_nested_map(nested_map, path), exp)
+
+    @parameterized.expand([
+        ({}, ["a"]),
+        ({"a": 1}, ["a", "b"])
+    ])
+    def test_access_nested_map_exception(self, nested_map: Mapping,
+                                         path: Sequence) -> Any:
+        '''This tests exception handling'''
+        self.assertRaises(KeyError, access_nested_map, nested_map, path)
+
+
+class TestGetJson(unittest.TestCase):
+    '''This class testts the get_json function'''
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False}),
+    ])
+    @mock.patch('test_utils.get_json')
+    def test_get_json(self, url, payload, mock_get_json):
+        # use dot notation to assign the key word value to the mocked func
+        mock_get_json.return_value = payload
+        result = mock_get_json(url)
+        self.assertEqual(result, payload)
+
+
+class TestMemoize(unittest.TestCase):
+    '''This class tests memoization'''
+    def test_memoize(self):
+        '''Test the memoize'''
+        class TestClass:
+
+            def a_method(self):
+                return 42
+
+            @memoize
+            def a_property(self):
+                print("inside")
+                return self.a_method()
+
+        with mock.patch.object(TestClass, 'a_method',
+                               return_value=42) as mock_a:
+            class_test = TestClass()
+            class_test.a_property
+            class_test.a_property
+            mock_a.assert_called_once
+
+
+if __name__ == '__main__':
+    unittest.main()
