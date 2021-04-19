@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Generic utilities for github org client.
-"""
+'''Test usilities for different functions'''
 import json
 import requests
 import unittest
