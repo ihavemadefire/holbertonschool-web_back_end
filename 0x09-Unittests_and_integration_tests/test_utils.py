@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 '''Test usilities for different functions'''
-import json
 import requests
 import unittest
 from unittest.mock import patch
@@ -18,8 +17,8 @@ from utils import access_nested_map, get_json, memoize
 class TestAccessNestedMap(unittest.TestCase):
     '''This class tests mapping methods'''
     @parameterized.expand([
-        ({"a": 1}, ["a"], 1),
-        ({"a": {"b": 2}}, ["a"], {"b": 2}),
+        ({"a": 1}, ["a", ], 1),
+        ({"a": {"b": 2}}, ["a", ], {"b": 2}),
         ({"a": {"b": 2}}, ["a", "b"], 2)
     ])
     def test_access_nested_map(self, nested_map: Mapping,
@@ -28,7 +27,7 @@ class TestAccessNestedMap(unittest.TestCase):
         self.assertEqual(access_nested_map(nested_map, path), exp)
 
     @parameterized.expand([
-        ({}, ["a"]),
+        ({}, ["a", ]),
         ({"a": 1}, ["a", "b"])
     ])
     def test_access_nested_map_exception(self, nested_map: Mapping,
@@ -41,7 +40,7 @@ class TestGetJson(unittest.TestCase):
     '''This class testts the get_json function'''
     @parameterized.expand([
         ("http://example.com", {"payload": True}),
-        ("http://holberton.io", {"payload": False}),
+        ("http://holberton.io", {"payload": False})
     ])
     @patch('test_utils.get_json')
     def test_get_json(self, url, payload, mock_get_json):
