@@ -4,7 +4,7 @@
 import json
 import requests
 import unittest
-from unittest import mock
+from unittest.mock import patch
 from parameterized import parameterized
 from typing import (
     Mapping,
@@ -44,7 +44,7 @@ class TestGetJson(unittest.TestCase):
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False}),
     ])
-    @mock.patch('test_utils.get_json')
+    @patch('test_utils.get_json')
     def test_get_json(self, url, payload, mock_get_json):
         # use dot notation to assign the key word value to the mocked func
         mock_get_json.return_value = payload
@@ -55,9 +55,8 @@ class TestGetJson(unittest.TestCase):
 class TestMemoize(unittest.TestCase):
     '''This class tests memoization'''
     def test_memoize(self):
-        '''Test the memoize'''
+        '''Test the memoize and compare results'''
         class TestClass:
-
             def a_method(self):
                 return 42
 
@@ -65,8 +64,8 @@ class TestMemoize(unittest.TestCase):
             def a_property(self):
                 return self.a_method()
 
-        with mock.patch.object(TestClass, 'a_method',
-                               return_value=42) as mock_a:
+        with patch.object(TestClass, 'a_method',
+                          return_value=42) as mock_a:
             class_test = TestClass()
             a = class_test.a_property
             b = class_test.a_property
