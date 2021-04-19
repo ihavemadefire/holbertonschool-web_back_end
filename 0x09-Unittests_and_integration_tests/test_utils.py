@@ -4,13 +4,6 @@ import requests
 import unittest
 from unittest.mock import patch
 from parameterized import parameterized
-from typing import (
-    Mapping,
-    Sequence,
-    Any,
-    Dict,
-    Callable,
-)
 from utils import access_nested_map, get_json, memoize
 
 
@@ -21,8 +14,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
         ({"a": {"b": 2}}, ("a", "b"), 2)
     ])
-    def test_access_nested_map(self, nested_map: Mapping,
-                               path: Sequence, exp: int) -> Any:
+    def test_access_nested_map(self, nested_map, path, exp):
         '''This tests correct inputs to the function'''
         self.assertEqual(access_nested_map(nested_map, path), exp)
 
@@ -30,8 +22,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({}, ("a",)),
         ({"a": 1}, ("a", "b"))
     ])
-    def test_access_nested_map_exception(self, nested_map: Mapping,
-                                         path: Sequence) -> Any:
+    def test_access_nested_map_exception(self, nested_map, path):
         '''This tests exception handling'''
         self.assertRaises(KeyError, access_nested_map, nested_map, path)
 
