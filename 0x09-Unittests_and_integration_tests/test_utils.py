@@ -121,18 +121,19 @@ class TestMemoize(unittest.TestCase):
         class TestClass:
 
             def a_method(self):
-                '''This is part of the memoize class'''
                 return 42
 
             @memoize
             def a_property(self):
-                '''So is this one'''
                 return self.a_method()
 
-        with mock.patch.object(TestClass, 'a_method') as mock_a:
+        with mock.patch.object(TestClass, 'a_method',
+                               return_value=42) as mock_a:
             class_test = TestClass()
-            class_test.a_property
-            class_test.a_property
+            a = class_test.a_property
+            b = class_test.a_property
+            self.assertEqual(a, 42)
+            self.assertEqual(b, 42)
             mock_a.assert_called_once()
 
 
