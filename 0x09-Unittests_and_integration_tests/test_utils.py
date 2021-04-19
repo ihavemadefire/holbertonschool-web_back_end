@@ -24,7 +24,7 @@ class TestAccessNestedMap(unittest.TestCase):
     ])
     def test_access_nested_map_exception(self, nested_map, path):
         '''This tests exception handling'''
-        self.assertRaises(KeyError, access_nested_map, nested_map, path)
+        self.assertRaises(KeyError, access_nested_map(nested_map, path))
 
 
 class TestGetJson(unittest.TestCase):
@@ -35,6 +35,7 @@ class TestGetJson(unittest.TestCase):
     ])
     @patch('test_utils.get_json')
     def test_get_json(self, url, payload, mock_get_json):
+        '''This function tests the get_json function'''
         # use dot notation to assign the key word value to the mocked func
         mock_get_json.return_value = payload
         result = mock_get_json(url)
