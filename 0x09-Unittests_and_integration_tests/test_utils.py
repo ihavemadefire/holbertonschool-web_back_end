@@ -134,7 +134,7 @@ class TestMemoize(unittest.TestCase):
             class_test = TestClass()
             class_test.a_property
             class_test.a_property
-            mock_a.assert_called_once
+            mock_a.assert_called_once()
 
 
 if __name__ == '__main__':
