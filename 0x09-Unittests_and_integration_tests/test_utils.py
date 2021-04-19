@@ -33,7 +33,7 @@ class TestGetJson(unittest.TestCase):
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False})
     ])
-    @patch('test_utils.get_json')
+    @patch('utils.get_json')
     def test_get_json(self, url, payload, mock_get_json):
         '''This function tests the get_json function'''
         # use dot notation to assign the key word value to the mocked func
