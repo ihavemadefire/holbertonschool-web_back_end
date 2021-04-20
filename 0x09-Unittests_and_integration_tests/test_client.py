@@ -46,3 +46,12 @@ class TestGithubOrgClient(unittest.TestCase):
                              "http://thisisnotreal.com")
             mock_get_json.assert_called_once()
             mockItUp.assert_called_once()
+
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False)
+    ])
+    def test_has_license(self, repo, license_key, exp):
+        '''Test for the assert license function'''
+        test = GithubOrgClient('ThisIsNotARealOrg')
+        self.assertEqual(test.has_license(repo, license_key), exp)
