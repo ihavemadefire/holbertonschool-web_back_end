@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 '''This module tests the github org functions'''
-from parameterized import parameterized
+from parameterized import parameterized, parameterized_class
 from client import GithubOrgClient
 from client import get_json
 import unittest
+import requests
 from unittest.mock import patch, PropertyMock
+from fixtures import TEST_PAYLOAD
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -55,3 +57,28 @@ class TestGithubOrgClient(unittest.TestCase):
         '''Test for the assert license function'''
         test = GithubOrgClient('ThisIsNotARealOrg')
         self.assertEqual(test.has_license(repo, license_key), exp)
+
+@parameterized_class(
+    ('org_payload', 'repos_payload', 'expected_repos', 'apache2_repos'),
+    [TEST_PAYLOAD[0][0],
+     TEST_PAYLOAD[0][1],
+     TEST_PAYLOAD[0][2],
+     TEST_PAYLOAD[0][3]]
+)
+class TestIntegrationGithubOrgClient(unittest.TestCase):
+    '''Integration testing class'''
+    @classmethod
+    def setUpClass(cls):
+        '''Mock requests.get()'''
+        # patch requests.get()
+        cls.get_patcher = patch('requests.get')
+        # set side_effect
+        cls.get_patcher.side_effect = repos_payload
+        #start the patcher
+        cls.get_patcher.start()
+
+    @classmethod
+    def tearDownClass(cls):
+        '''"STOP MOCKING ME", requests.get() said'''
+        #stop patcher
+        cls.get_patcher.stop()
