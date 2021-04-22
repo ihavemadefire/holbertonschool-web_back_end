@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''This module is the main flask application'''
-from flask import Flask, render_template. request
+from flask import Flask, render_template, request
 from flask_babel import Babel
 
 app = Flask(__name__)
@@ -26,7 +26,7 @@ def hello_world():
 @babel.localeselector
 def get_locale():
     '''This gets the locale'''
-    return request.accept_languages.best_match(['fr', 'en'])
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 if __name__ == "__main__":
