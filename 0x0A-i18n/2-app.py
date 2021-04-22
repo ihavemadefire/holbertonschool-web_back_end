@@ -26,9 +26,6 @@ def hello_world():
 @babel.localeselector
 def get_locale():
     '''This gets the locale'''
-    user = getattr(g, 'user', None)
-    if user is not None:
-        return user.locale
     return request.accept_languages.best_match(['fr', 'en'])
 
 
