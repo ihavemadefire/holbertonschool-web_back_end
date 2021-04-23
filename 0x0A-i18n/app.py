@@ -27,8 +27,8 @@ app.config.from_object(Config)
 @app.route('/')
 def index():
     '''The only route'''
-    time = format_datetime(datetime.now())
-    return render_template('index.html', time=time)
+    current_time = format_datetime(datetime.now())
+    return render_template('index.html', current_time=current_time)
 
 
 @babel.localeselector
