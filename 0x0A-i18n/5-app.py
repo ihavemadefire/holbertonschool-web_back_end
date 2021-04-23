@@ -32,9 +32,11 @@ def get_user(user_id):
 
 @app.before_request
 def before_request():
+    '''this function rens before other functions'''
     user_id = request.args.get("login_as")
     if user_id:
-        g.user = get_user(int(user_id))
+        user_id = int(user_id)
+    g.user = get_user(user_id)
 
 
 @app.route('/')
