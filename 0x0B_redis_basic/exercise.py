@@ -9,6 +9,7 @@ from functools import wraps
 def count_calls(method: Callable) -> Callable:
     '''This counts the number of times a function has been called'''
     key = method.__qualname__
+
     @wraps(method)
     def wrapper(self, *args, **kwds):
         '''The wrapper function'''
@@ -22,7 +23,7 @@ def call_history(method: Callable) -> Callable:
     @wraps(method)
     def wrapper(self, *args, **kwds):
         '''The wrapper function'''
-        #pushes input to list stack
+        # pushes input to list stack
         self._redis.rpush(method.__qualname__ + ':inputs', str(args))
         output = method(self, *args, **kwds)
         self._redis.rpush(method.__qualname__ + ':outputs', output)
