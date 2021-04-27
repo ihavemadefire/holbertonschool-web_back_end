@@ -59,8 +59,9 @@ class Cache:
         self._redis.mset({key: data})
         return key
 
-    def get(self, key: str, fn: Optional[Callable] = None) -> Any:
+    def get(self, key: str, fn: Optional[Callable] = None) -> Union[
+            str, bytes, int, float]:
         '''This returns a value in its stored form'''
         if fn:
-            return fn(self.redis.get(key))
+            return fn(self._redis.get(key))
         return self._redis.get(key)
