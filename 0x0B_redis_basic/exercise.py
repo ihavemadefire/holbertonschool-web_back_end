@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 '''This module contains the REDIS exercise'''
 from uuid import uuid4
-from typing import Any, Callable, Optional
+from typing import Union, Callable, Optional
 import redis
 from functools import wraps
 
@@ -52,7 +52,7 @@ class Cache():
 
     @call_history
     @count_calls
-    def store(self, data: Any) -> str:
+    def store(self, data: Union[str, bytes, int, float]) -> str:
         '''This stores data'''
         key = str(uuid4())
         self._redis.mset({key: data})
