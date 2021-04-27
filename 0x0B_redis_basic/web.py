@@ -16,7 +16,7 @@ def count_calls(method: Callable) -> Callable:
         '''The wrapper function'''
         key = "count:{}".format(args[0])
         red.incr(key, 1)
-        red.setex("result", 10, red.get(key))
+        red.setex("Count", 10, red.get(key))
         return method(*args, **kwds)
     return wrapper
 
