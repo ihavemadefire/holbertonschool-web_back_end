@@ -44,12 +44,12 @@ def replay(method: Callable) -> None:
                                      v.decode('utf-8')))
 
 
-class Cache():
+class Cache:
     '''This is the cache class'''
     def __init__(self):
         '''Initialization function'''
         self._redis = redis.Redis()
-        self._redis.flushdb
+        self._redis.flushdb()
 
     @call_history
     @count_calls
