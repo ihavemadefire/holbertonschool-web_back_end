@@ -1,2 +1,2 @@
 // Find a specific row
-db.school.find({name : 'Holberton school'}
+db.school.find({name : 'Holberton school'})
