@@ -1,2 +1,2 @@
 // Finds all the docs in a collection
-get.school.find()
+db.school.find()
