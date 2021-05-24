@@ -1,4 +1,4 @@
-function displayMessage() {
-  console.log('Hello NodeJS!');
+function displayMessage(message) {
+  console.log(message);
 }
 module.exports = displayMessage;
